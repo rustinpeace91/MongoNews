@@ -53,10 +53,13 @@ router.get("/scrape", function(req,res){
     // request.get("https://www.reuters.com/news/world").then((response)=> {
     //     res.json(response)
     // });
-    axios.get("https://www.reuters.com/news/world").then((response) => {
+    axios.get({
+        url: "https://www.reuters.com/news/world",
+        maxContentLength: 20
+    }).then((response) => {
         var $ = cheerio.load(response.data);
         var x = 10;
-        $(".item_AanJv story_with_image_featured").each(function(i, element){
+        $(".item_AanJv story_with_image_featured").each(function(i, elementi){
             res.json($(this));
         })
 
