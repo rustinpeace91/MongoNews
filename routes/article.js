@@ -5,6 +5,11 @@
 var express = require("express");
 var db = require("../models");
 var router = express.Router();
+// Our scraping tools
+// Axios is a promised-based http library, similar to jQuery's Ajax method
+// It works on the client and on the server
+var axios = require("axios");
+var cheerio = require("cheerio");
 
 
 // retrieves all articles from the DB and renders them to the homepage
@@ -42,6 +47,22 @@ db.Article.find({})
 });
 
 
+
+router.get("/scrape", function(req,res){
+    console.log("yeah");
+    // request.get("https://www.reuters.com/news/world").then((response)=> {
+    //     res.json(response)
+    // });
+    axios.get("https://www.reuters.com/news/world").then((response) => {
+        var $ = cheerio.load(response.data);
+        var x = 10;
+        $(".item_AanJv story_with_image_featured").each(function(i, element){
+            res.json($(this));
+        })
+
+    })
+
+});
 
 // retrieves all the articles of a certain ID (not in use yet)
 router.get("/api/articles/:id", function(req,res){

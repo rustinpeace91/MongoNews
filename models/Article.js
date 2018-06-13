@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
 
@@ -19,7 +18,7 @@ var ArticleSchema = new Schema({
     comment: {
         type: Schema.Types.ObjectId,
         ref: "UserComment"
-      }
+    }
 
 });
 
