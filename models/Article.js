@@ -7,6 +7,7 @@ var ArticleSchema = new Schema({
     title: {
         type: String,
         required:true,
+        //it will not add duplicate articles to the saved articles database 
         unique: true
     },
     link: {

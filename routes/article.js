@@ -54,11 +54,14 @@ router.get("/scrape", function(req,res){
     //     res.json(response)
     // });
     axios.get("https://www.reuters.com/news/world").then((response) => {
-        console.log(response);
         var $ = cheerio.load(response.data);
         var result = {};
-        $(".item_AanJv story_with_image_featured").each(function(i, elementi){
-            
+        $(".item_AanJv").each(function(i, element){
+            result.title = $(this).find("h2.headline_ZR_Fh a").text();
+            result.link = $(this).find("h2.headline_ZR_Fh a").attr("href");
+            result.summary = $(this).find("p.lede_Wa-ek").text();
+
+            console.log(result);
         })
         res.json({});
     })
