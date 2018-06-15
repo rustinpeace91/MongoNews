@@ -40,11 +40,11 @@ $(document).ready(function(){
     })
 
     // deletes a character
-    $(".delete-char").on("click", function(event) {
+    $(".delete-article").on("click", function(event) {
         event.preventDefault();
         var id = $(this).data("id");
         console.log(id);
-        $.ajax('/api/characters/' + id, {
+        $.ajax('/api/articles/' + id, {
             type: 'DELETE',
             data: id
         }).then(function(){
