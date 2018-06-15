@@ -81,6 +81,7 @@ router.get("/scrape", function(req,res){
 router.get("/api/articles/:id", function(req,res){
 console.log(req.params.id)
 db.Article.find({_id : req.params.id})
+    .populate("comments")
     .then(function(data){
         res.json(data);
     })
@@ -103,6 +104,23 @@ db.Article.create(req.body)
     res.json(err);
     });
 });
+
+
+router.post("/api/articles/:id", function(req, res) {
+    // Create a new characterin the database
+    db.UserComment.create(req.body)
+        .then(function(data) {
+            return db.Article.findOneAndUpdate({_id: req.params.id}, {$push: { comments: data._id }}, { new: true })
+ 
+        }).then(data => {
+            res.json(data);
+        })
+        .catch(function(err) {
+        // If an error occurs, send it back to the client
+        res.json(err);
+        });
+    });
+    
 
 router.delete("/api/articles/:id", function(req,res){
 

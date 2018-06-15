@@ -17,10 +17,12 @@ var ArticleSchema = new Schema({
     summary: {
         type: String
     },
-    comment: {
-        type: Schema.Types.ObjectId,
-        ref: "UserComment"
-    }
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "UserComment"
+        }
+    ]
 
 });
 
