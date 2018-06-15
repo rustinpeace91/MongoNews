@@ -1,0 +1,40 @@
+<div class = "jumbotron">
+    <h1>GitPoster</h1>
+    <p>Go Ahead.....Read the comments</p>
+</div>
+
+<h2>New Articles</h2>
+<h2>Saved Articles</h2>
+<div id="accordion">
+  
+
+<!-- cycles through each character and displays them in tabs --> 
+
+{{#each scraped}}
+  <div class="card">
+
+    <div class="card card-header">
+        <a id = "link" href={{link}} target="_blank"><h3 id = "title">{{title}}</h3></a>
+        <p>
+        <a class="btn btn-primary collapsed" data-toggle="collapse" href="#{{id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Summary
+        </a>
+        <button id = "save-article" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+         Save Article
+        </button>
+        </p>
+    </div>
+    <div class="collapse" id={{id}} style="">
+      <div class="card card-body">
+        <p id = "summary">{{summary}}</p>
+      </div>
+    </div>
+  </div>
+{{/each}}
+</div>
+
+
+<button class ="btn btn-primary" >
+  Scrape
+</button>
+

@@ -21,6 +21,7 @@ db.Article.find({})
     var hbsObject = {
         articles:data
     }
+    console.log(hbsObject);
     res.render("index", hbsObject)
 })
 .catch(function(err) {
@@ -53,19 +54,27 @@ router.get("/scrape", function(req,res){
     // request.get("https://www.reuters.com/news/world").then((response)=> {
     //     res.json(response)
     // });
+    var hbsObject = {
+        scraped: []
+    }
+
     axios.get("https://www.reuters.com/news/world").then((response) => {
         var $ = cheerio.load(response.data);
         var result = {};
         $(".item_AanJv").each(function(i, element){
+            result.id = i;
             result.title = $(this).find("h2.headline_ZR_Fh a").text();
             result.link = $(this).find("h2.headline_ZR_Fh a").attr("href");
             result.summary = $(this).find("p.lede_Wa-ek").text();
+ 
 
-            console.log(result);
+            hbsObject.scraped.push(result);
+            console.log(hbsObject.scraped[i]);
         })
-        res.json({});
-    })
 
+        // console.log(hbsObject);
+        res.render("scrape", hbsObject);
+    })
 });
 
 // retrieves all the articles of a certain ID (not in use yet)
