@@ -1,3 +1,6 @@
+body {
+    background:#54585e;
+}
 * {
     border-radius: 0px !important;
 }
@@ -5,4 +8,22 @@
 a {
     color: rgb(69, 99, 147);
     text-decoration: none;
+}
+
+.control-panel {
+    background-color:#e9ecef;
+}
+
+h2{
+    color:#fff;
+}
+
+.header-image{
+    background-image: url(images/earth-lights-world.jpg);
+    background-size: cover;
+    margin-bottom: 0rem;
+    height: 300px;
+    text-align:center;
+    color:#fff;
+    padding-top:100px;
 }
