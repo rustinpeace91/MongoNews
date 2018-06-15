@@ -58,7 +58,7 @@ router.get("/scrape", function(req,res){
         var $ = cheerio.load(response.data);
         var result = {};
         $(".item_AanJv story_with_image_featured").each(function(i, elementi){
-           
+            
         })
         res.json({});
     })
