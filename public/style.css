@@ -1,5 +1,6 @@
 body {
-    background:#54585e;
+    background-color:#e9ecef;
+
 }
 * {
     border-radius: 0px !important;
@@ -11,12 +12,18 @@ a {
 }
 
 .control-panel {
-    background-color:#e9ecef;
+    background:#54585e;
 }
 
-h2{
+.breadcrumb {
+    background:#54585e;
+
+}
+
+.breadcrumb a{
     color:#fff;
 }
+
 
 .header-image{
     background-image: url(images/earth-lights-world.jpg);

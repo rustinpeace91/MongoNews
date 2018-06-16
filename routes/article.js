@@ -60,8 +60,9 @@ router.get("/scrape", function(req,res){
 
     axios.get("https://www.reuters.com/news/world").then((response) => {
         var $ = cheerio.load(response.data);
-        var result = {};
+
         $(".item_AanJv").each(function(i, element){
+            var result = {};
             result.id = i;
             result.title = $(this).find("h2.headline_ZR_Fh a").text();
             result.link = $(this).find("h2.headline_ZR_Fh a").attr("href");
@@ -69,8 +70,9 @@ router.get("/scrape", function(req,res){
  
 
             hbsObject.scraped.push(result);
-            console.log(hbsObject.scraped[i]);
+            // console.log(hbsObject.scraped[i]);
         })
+        console.log(hbsObject.scraped);
 
         // console.log(hbsObject);
         res.render("scrape", hbsObject);
@@ -88,6 +90,18 @@ db.Article.find({_id : req.params.id})
     .catch(function(err){
         res.json(err);
     });
+});
+
+router.delete("/api/comments/:id", function(req,res){
+
+    db.UserComment.deleteOne({_id : req.params.id})
+        .then(function(data){
+            res.json(data);
+    
+        })
+        .catch(function(err){
+            res.json(err);
+        });
 });
 
 
@@ -121,6 +135,18 @@ router.post("/api/articles/:id", function(req, res) {
         });
     });
     
+
+router.delete("/api/articles/:id", function(req,res){
+
+db.Article.deleteOne({_id : req.params.id})
+    .then(function(data){
+        res.json(data);
+
+    })
+    .catch(function(err){
+        res.json(err);
+    });
+});
 
 router.delete("/api/articles/:id", function(req,res){
 

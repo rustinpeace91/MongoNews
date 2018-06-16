@@ -64,9 +64,19 @@ $(document).ready(function(){
                type: 'GET',
                data: id
            }).then(function(data){
-               if(data.comments){
-                   data.comments.forEach(function(element){
+               // for some reason the comments come back as an index of 0 in the data objects
+               console.log(data[0].comments[1].body);
+               if(data[0].comments[0]){
+                   data[0].comments.forEach(function(element){
                        console.log(element);
+                       let comment = "<div class = 'card'><div class = 'card card-header'>"
+                       +element.title +"</div>"+
+                       "<div class = card card-body>"
+                       +element.body + 
+                       "<button class = 'delete-comment' data-id = " + element._id + ">X</button>" +
+                       "</div></div>"
+                       $("#comments-body").prepend(comment);
+
                    });
                } else {
                    console.log("no comments in this one");
@@ -74,6 +84,18 @@ $(document).ready(function(){
    
            })
        })
+
+    //    $(".delete-comment").on("click", function(event){
+
+    //    }).then(function(data){
+    //     event.preventDefault();
+    //     let id = $(this).data("id");
+    //     console.log(id);
+    //     $.ajax('/api/articles/' + id, {
+    //         type: 'GET',
+    //         data: id
+    //     });
+    //    });
 
        $("#post-comment").on("click", function(event){
            event.preventDefault();
@@ -91,5 +113,7 @@ $(document).ready(function(){
                type: 'POST',
                data: commentObject
            })
-       })
+       });
+
+       
 });
