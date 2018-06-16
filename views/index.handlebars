@@ -10,7 +10,7 @@
         <a class="btn btn-primary collapsed" data-toggle="collapse" href="#{{_id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
           Summary
         </a>
-        <button class="display-comments btn btn-primary"  data-toggle="modal" data-id ="{{_id}}" data-target="#comments" aria-expanded="false" aria-controls="collapseExample">
+        <button class="display-comments btn btn-primary"  data-toggle="modal" data-id ="{{_id}}" data-target="#{{_id}}comments" aria-expanded="false" aria-controls="collapseExample">
          Comments
         </button>
         <button class = "btn btn-danger delete-article float-right" data-id ="{{_id}}" >X</button>
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Modal -->
-<div class="modal fade" id="comments" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{_id}}comments" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -36,7 +36,7 @@
 
         </button>
       </div>
-      <div id = "comments-body" class = "modal-body">
+      <div id = "{{_id}}comments-body" class = "modal-body">
  
       </div>
       <div class="form-group">
@@ -46,10 +46,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id = "post-comment" data-id ="{{_id}}" type="button" class="btn btn-primary">Post Comment</button>
+        <button data-id ="{{_id}}" type="button" class="post-comment btn btn-primary">Post Comment</button>
       </div>
     </div>
   </div>
+</div>
 </div>
 {{/each}}
 </div>

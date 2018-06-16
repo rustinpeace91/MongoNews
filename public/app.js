@@ -1,12 +1,12 @@
 $(document).ready(function(){
 
-    $("#save-article").on("click", event =>{
-        //event.preventDefault();
-
+    $(".save-article").on("click", function(event){
+        event.preventDefault();
+        let id = $(this).data("id");
         //grab the article stats 
-        let title = $("#title").text().trim();
-        let link= $("#link").attr("href");
-        let summary= $("#summary").text().trim();
+        let title = $("#" + id + "-title").text().trim();
+        let link= $("#" + id + "-link").attr("href");
+        let summary= $("#" + id + "-summary").text().trim();
 
 
         // puts the stats in an object
@@ -57,15 +57,17 @@ $(document).ready(function(){
 
         // Display comments
         $(".display-comments").on("click", function(event) {
+            
             // event.preventDefault();
-           let id = $(this).data("id");
+           const id = $(this).data("id");
+           $("#" + id + "comments-body").empty();
            console.log(id);
            $.ajax('/api/articles/' + id, {
                type: 'GET',
                data: id
            }).then(function(data){
                // for some reason the comments come back as an index of 0 in the data objects
-               console.log(data[0].comments[1].body);
+            //    console.log(data[0].comments[1].body);
                if(data[0].comments[0]){
                    data[0].comments.forEach(function(element){
                        console.log(element);
@@ -75,13 +77,15 @@ $(document).ready(function(){
                        +element.body + 
                        "<button class = 'delete-comment' data-id = " + element._id + ">X</button>" +
                        "</div></div>"
-                       $("#comments-body").prepend(comment);
+                       $("#" + id + "comments-body").prepend(comment);
 
                    });
                } else {
+                 $("#" + id + "comments-body").text("");
                    console.log("no comments in this one");
                }
-   
+            
+            // The "delete comment button" is loaded only after the comments have displayed.
            }).then(function(data){
             $(".delete-comment").on("click", function(event){
                 console.log("yeah");
@@ -101,7 +105,7 @@ $(document).ready(function(){
 
 
 
-       $("#post-comment").on("click", function(event){
+       $(".post-comment").on("click", function(event){
            event.preventDefault();
            let id = $(this).data("id");
            let title = $("#comment-title").val().trim();
