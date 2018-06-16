@@ -57,7 +57,7 @@ $(document).ready(function(){
 
         // Display comments
         $(".display-comments").on("click", function(event) {
-            event.preventDefault();
+            // event.preventDefault();
            let id = $(this).data("id");
            console.log(id);
            $.ajax('/api/articles/' + id, {
@@ -82,20 +82,24 @@ $(document).ready(function(){
                    console.log("no comments in this one");
                }
    
+           }).then(function(data){
+            $(".delete-comment").on("click", function(event){
+                console.log("yeah");
+                 // event.preventDefault();
+                 let id = $(this).data("id");
+                 console.log(id);
+                 $.ajax('/api/comments/' + id, {
+                     type: 'DELETE',
+                     data: id
+                 }).then(function(data){
+                     window.location.href = "/";
+                 });
+     
+            })
            })
        })
 
-    //    $(".delete-comment").on("click", function(event){
 
-    //    }).then(function(data){
-    //     event.preventDefault();
-    //     let id = $(this).data("id");
-    //     console.log(id);
-    //     $.ajax('/api/articles/' + id, {
-    //         type: 'GET',
-    //         data: id
-    //     });
-    //    });
 
        $("#post-comment").on("click", function(event){
            event.preventDefault();
