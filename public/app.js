@@ -39,9 +39,12 @@ $(document).ready(function(){
         window.location.href = "/form";
     })
 
+
+
     // deletes a character
+    // for some reason using ES6 causes the id to come back undefined.  event => breaks it. I have no idea why, but I know that is the cause of the jQuery issue. 
     $(".delete-article").on("click", function(event) {
-        event.preventDefault();
+        //event.preventDefault();
         var id = $(this).data("id");
         console.log(id);
         $.ajax('/api/articles/' + id, {
@@ -51,4 +54,42 @@ $(document).ready(function(){
             window.location.href = "/";
         })
     });
+
+        // Display comments
+        $(".display-comments").on("click", function(event) {
+            event.preventDefault();
+           let id = $(this).data("id");
+           console.log(id);
+           $.ajax('/api/articles/' + id, {
+               type: 'GET',
+               data: id
+           }).then(function(data){
+               if(data.comments){
+                   data.comments.forEach(function(element){
+                       console.log(element);
+                   });
+               } else {
+                   console.log("no comments in this one");
+               }
+   
+           })
+       })
+
+       $("#post-comment").on("click", function(event){
+           event.preventDefault();
+           let id = $(this).data("id");
+           let title = $("#comment-title").val().trim();
+           let body = $("#comment-content").val().trim();
+           console.log(id);
+           console.log(title);
+           console.log(body);
+           commentObject = {
+               title: title,
+               body: body
+           }
+           $.ajax("/api/articles/" + id, {
+               type: 'POST',
+               data: commentObject
+           })
+       })
 });

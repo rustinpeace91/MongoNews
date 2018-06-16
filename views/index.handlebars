@@ -10,10 +10,10 @@
         <a class="btn btn-primary collapsed" data-toggle="collapse" href="#{{_id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
           Summary
         </a>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <button class="display-comments btn btn-primary"  data-toggle="modal" data-id ="{{_id}}" data-target="#comments" aria-expanded="false" aria-controls="collapseExample">
          Comments
         </button>
-        <button class = "btn btn-danger delete-article float-right" data-id = "{{_id}}" >X</button>
+        <button class = "btn btn-danger delete-article float-right" data-id ="{{_id}}" >X</button>
         </p>
     </div>
     <div class="collapse" id={{_id}} style="">
@@ -21,10 +21,35 @@
         {{summary}}
       </div>
     </div>
-        <div class="collapse" id={{_id}} style="">
+    <div class="collapse" id={{_id}} style="">
       <div class="card card-body">
-        {{comments}}
       </div>
     </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="comments" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Comments</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+        </button>
+      </div>
+      <div class="comments-body modal-body">
+ 
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">New Comment</label>
+        <input id = "comment-title" class="form-control" type="text" placeholder="Title">
+        <textarea id = "comment-content"class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Content"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id = "post-comment" data-id ="{{_id}}" type="button" class="btn btn-primary">Post Comment</button>
+      </div>
+    </div>
+  </div>
+</div>
 {{/each}}
 </div>

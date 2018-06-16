@@ -16,12 +16,12 @@ var cheerio = require("cheerio");
 router.get("/" , function(req,res){
     // Using our character model, "find" every character in our db
 db.Article.find({})
+.populate("comments")
 .then(function(data) {
     // If any articles are found, send them to the client
     var hbsObject = {
         articles:data
     }
-    console.log(hbsObject);
     res.render("index", hbsObject)
 })
 .catch(function(err) {
@@ -79,11 +79,11 @@ router.get("/scrape", function(req,res){
 
 // retrieves all the articles of a certain ID (not in use yet)
 router.get("/api/articles/:id", function(req,res){
-console.log(req.params.id)
 db.Article.find({_id : req.params.id})
     .populate("comments")
     .then(function(data){
         res.json(data);
+        console.log(data);
     })
     .catch(function(err){
         res.json(err);
