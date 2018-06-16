@@ -107,10 +107,10 @@ router.delete("/api/comments/:id", function(req,res){
 
 
 router.post("/api/articles", function(req, res) {
-// Create a new characterin the database
+// Create a new  article in  the database
 db.Article.create(req.body)
     .then(function(data) {
-    // If the Library was updated successfully, send it back to the client
+    // If the article was updated successfully, send it back to the client
     res.json(data);
     })
     .catch(function(err) {
@@ -121,7 +121,7 @@ db.Article.create(req.body)
 
 
 router.post("/api/articles/:id", function(req, res) {
-    // Create a new characterin the database
+    // Create a new user comment in  the database
     db.UserComment.create(req.body)
         .then(function(data) {
             return db.Article.findOneAndUpdate({_id: req.params.id}, {$push: { comments: data._id }}, { new: true })

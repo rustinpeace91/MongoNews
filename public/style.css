@@ -24,7 +24,7 @@ a {
     color:#fff;
 }
 
-
+/*sets the height of the header image*/
 .header-image{
     background-image: url(images/earth-lights-world.jpg);
     background-size: cover;
