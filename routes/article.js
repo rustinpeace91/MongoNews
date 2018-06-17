@@ -22,6 +22,7 @@ db.Article.find({})
     var hbsObject = {
         articles:data
     }
+    //  console.log(hbsObject.articles[1].comments[0]);
     res.render("index", hbsObject)
 })
 .catch(function(err) {
@@ -50,7 +51,7 @@ db.Article.find({})
 
 
 router.get("/scrape", function(req,res){
-    console.log("yeah");
+    // console.log("yeah");
     // request.get("https://www.reuters.com/news/world").then((response)=> {
     //     res.json(response)
     // });
@@ -72,7 +73,7 @@ router.get("/scrape", function(req,res){
             hbsObject.scraped.push(result);
             // console.log(hbsObject.scraped[i]);
         })
-        console.log(hbsObject.scraped);
+        // console.log(hbsObject.scraped);
 
         // console.log(hbsObject);
         res.render("scrape", hbsObject);
@@ -85,7 +86,7 @@ db.Article.find({_id : req.params.id})
     .populate("comments")
     .then(function(data){
         res.json(data);
-        console.log(data);
+        // console.log(data);
     })
     .catch(function(err){
         res.json(err);

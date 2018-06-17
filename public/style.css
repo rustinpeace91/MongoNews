@@ -34,3 +34,11 @@ a {
     color:#fff;
     padding-top:100px;
 }
+
+.new-comment {
+     padding:15px;
+}
+
+.new-comment * {
+    margin-bottom:5px;
+}

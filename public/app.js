@@ -16,7 +16,7 @@ $(document).ready(function(){
             summary: summary
         }
 
-        console.log(articleObject);
+        // console.log(articleObject);
         $.ajax('/api/articles', {
             type: 'POST',
             data: articleObject
@@ -61,7 +61,7 @@ $(document).ready(function(){
             // event.preventDefault();
            const id = $(this).data("id");
            $("#" + id + "comments-body").empty();
-           console.log(id);
+        //    console.log(id);
            $.ajax('/api/articles/' + id, {
                type: 'GET',
                data: id
@@ -70,12 +70,13 @@ $(document).ready(function(){
             //    console.log(data[0].comments[1].body);
                if(data[0].comments[0]){
                    data[0].comments.forEach(function(element){
-                       console.log(element);
-                       let comment = "<div class = 'card'><div class = 'card card-header'>"
-                       +element.title +"</div>"+
-                       "<div class = card card-body>"
-                       +element.body + 
-                       "<button class = 'delete-comment' data-id = " + element._id + ">X</button>" +
+                    //    console.log(element.body);
+  
+                       let comment = "<div class = 'card'><div class = 'card card-header'><p>"
+                       +element.title +"</p></div>"+
+                       "<div class = card card-body><p>"
+                       + element.body + 
+                       "</p>" + "<button class = 'delete-comment float-right' data-id = " + element._id + ">Delete</button>" +
                        "</div></div>";
 
                        $("#" + id + "comments-body").append(comment);
@@ -92,7 +93,7 @@ $(document).ready(function(){
                 console.log("yeah");
                  // event.preventDefault();
                  let id = $(this).data("id");
-                 console.log(id);
+                //  console.log(id);
                  $.ajax('/api/comments/' + id, {
                      type: 'DELETE',
                      data: id
@@ -109,15 +110,17 @@ $(document).ready(function(){
        $(".post-comment").on("click", function(event){
            event.preventDefault();
            let id = $(this).data("id");
-           let title = $("#comment-title").val().trim();
-           let body = $("#comment-content").val().trim();
-           console.log(id);
-           console.log(title);
-           console.log(body);
+           let title = $("#" + id+ "comment-title").val().trim();
+           let body = $("#" + id + "comment-content").val().trim();
+        //    console.log(id);
+        //    console.log(title);
+        //    console.log(body);
            commentObject = {
                title: title,
                body: body
            }
+        //    console.log(commentObject.title);
+        //    console.log(comment.Object.body);
            $.ajax("/api/articles/" + id, {
                type: 'POST',
                data: commentObject

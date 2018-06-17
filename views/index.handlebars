@@ -2,6 +2,7 @@
 <h2>Saved Articles</h2>
 <div id="accordion">
 <!-- cycles through each saved article and displays them in tabs --> 
+<!-- The main method of referring to individual elements was to attatch the Mongo OBject ID to the id selector of each relevant element-->
 {{#each articles}}
   <div class="card">
     <div class="card card-header">
@@ -25,7 +26,13 @@
       <div class="card card-body">
       </div>
     </div>
+  </div>
 
+
+{{/each}}
+</div>
+
+{{#each articles}}
     <!-- Modal -->
 <div class="modal fade" id="{{_id}}comments" tabindex="-2" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog  modal-dialog-centered" role="document">
@@ -37,12 +44,12 @@
         </button>
       </div>
       <div id = "{{_id}}comments-body" class = "modal-body">
- 
+
       </div>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">New Comment</label>
-        <input id = "comment-title" class="form-control" type="text" placeholder="Title">
-        <textarea id = "comment-content"class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Content"></textarea>
+      <div class="form-group new-comment"  >
+        <label for="exampleFormControlTextarea1"><h5>New Comment</h5></label>
+        <input id = "{{_id}}comment-title" class="form-control" type="text" placeholder="Title">
+        <textarea id = "{{_id}}comment-content"class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Content"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -51,6 +58,6 @@
     </div>
   </div>
 </div>
-</div>
+
+
 {{/each}}
-</div>
