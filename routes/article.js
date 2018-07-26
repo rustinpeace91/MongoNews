@@ -59,15 +59,9 @@ router.get("/scrape", function(req,res){
     var hbsObject = {
         scraped: []
     }
-    //=====================DUMMY DATA VERSION==================================== //
-    hbsObject.scraped = dummydata.scraped;
-    console.log(hbsObject); 
-    res.render("scrape", hbsObject);
-
-    
-    //=====================END DUMMY DATA VERSION==================================== //
 
     // ==================== WEB SCRAPER CODE =================================== //
+
     // axios.get("https://www.reuters.com/news/world").then((response) => {
     //     var $ = cheerio.load(response.data);
 
@@ -85,7 +79,20 @@ router.get("/scrape", function(req,res){
 
     //     res.render("scrape", hbsObject);
     // })
+
     // ===================== END WEB SCRAPER CODE ================================= //
+
+    // //=====================DUMMY DATA VERSION==================================== //
+
+    // function setData(hbsObject, dummyData, func) {
+    //     hbsObject.scraped = dummyData.scraped;
+    //     func(res, hbsObject);
+    // };
+    // setData(hbsObject, dummydata, function(res, hbsObject){
+    //     res.render("scrape", hbsObject);
+    // });  
+      
+    // //=====================END DUMMY DATA VERSION==================================== //
 });
 
 
