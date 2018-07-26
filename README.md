@@ -10,6 +10,9 @@ To visit a live version of the site. go here: https://arcane-hamlet-91719.heroku
 ## Use 
 Simply click on the "scrape articles" tab to scrape Reuters for new aticles, save the articles you want. They will now appear on the home page where you can comment on them. You can delete both saved articles and comments.  
 
+### DISCLAIMER
+The Reuters News Scraper uses HTML element targeting to scrape articles, these HTML elements are subject to update on the website, so therefore I cannot currently guarantee that the scrape function will work in the future as Reuters will most likely update their website in the near future. 
+
 This app is built using Mongo DB, Bootstrap 4, Jquery, Axios and the MVC Design pattern. 
 
 ![mongo scraper](http://www.isaaclubanko.com/assets/images/globeposter.jpg)
