@@ -10,7 +10,8 @@ var router = express.Router();
 // It works on the client and on the server
 var axios = require("axios");
 var cheerio = require("cheerio");
-
+var fs = require('fs');
+var dummydata = require("../public/data/dummydata.json");
 
 // retrieves all articles from the DB and renders them to the homepage
 router.get("/" , function(req,res){
@@ -58,27 +59,35 @@ router.get("/scrape", function(req,res){
     var hbsObject = {
         scraped: []
     }
+    //=====================DUMMY DATA VERSION==================================== //
+    hbsObject.scraped = dummydata.scraped;
+    console.log(hbsObject); 
+    res.render("scrape", hbsObject);
 
-    axios.get("https://www.reuters.com/news/world").then((response) => {
-        var $ = cheerio.load(response.data);
+    
+    //=====================END DUMMY DATA VERSION==================================== //
 
-        $(".ImageStoryTemplate_image-story-container").each(function(i, element){
-            var result = {};
-            result.id = i;
-            result.title = $(this).find("h2.FeedItemHeadline_full a").text();
-            result.link = $(this).find("h2.FeedItemHeadline_full a").attr("href");
-            result.summary = $(this).find("p.FeedItemLede_lede").text();
+    // ==================== WEB SCRAPER CODE =================================== //
+    // axios.get("https://www.reuters.com/news/world").then((response) => {
+    //     var $ = cheerio.load(response.data);
+
+    //     $(".ImageStoryTemplate_image-story-container").each(function(i, element){
+    //         var result = {};
+    //         result.id = i;
+    //         result.title = $(this).find("h2.FeedItemHeadline_full a").text();
+    //         result.link = $(this).find("h2.FeedItemHeadline_full a").attr("href");
+    //         result.summary = $(this).find("p.FeedItemLede_lede").text();
  
 
-            hbsObject.scraped.push(result);
-            // console.log(hbsObject.scraped[i]);
-        })
-        // console.log(hbsObject.scraped);
+    //         hbsObject.scraped.push(result);
+    //     })
+    //     // console.log(hbsObject.scraped);
 
-        // console.log(hbsObject);
-        res.render("scrape", hbsObject);
-    })
+    //     res.render("scrape", hbsObject);
+    // })
+    // ===================== END WEB SCRAPER CODE ================================= //
 });
+
 
 // retrieves all the articles of a certain ID (not in use yet)
 router.get("/api/articles/:id", function(req,res){
