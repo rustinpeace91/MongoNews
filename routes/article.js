@@ -62,12 +62,12 @@ router.get("/scrape", function(req,res){
     axios.get("https://www.reuters.com/news/world").then((response) => {
         var $ = cheerio.load(response.data);
 
-        $(".item_AanJv").each(function(i, element){
+        $(".ImageStoryTemplate_image-story-container").each(function(i, element){
             var result = {};
             result.id = i;
-            result.title = $(this).find("h2.headline_ZR_Fh a").text();
-            result.link = $(this).find("h2.headline_ZR_Fh a").attr("href");
-            result.summary = $(this).find("p.lede_Wa-ek").text();
+            result.title = $(this).find("h2.FeedItemHeadline_full a").text();
+            result.link = $(this).find("h2.FeedItemHeadline_full a").attr("href");
+            result.summary = $(this).find("p.FeedItemLede_lede").text();
  
 
             hbsObject.scraped.push(result);
