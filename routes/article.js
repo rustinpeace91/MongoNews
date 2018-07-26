@@ -62,23 +62,23 @@ router.get("/scrape", function(req,res){
 
     // ==================== WEB SCRAPER CODE =================================== //
 
-    // axios.get("https://www.reuters.com/news/world").then((response) => {
-    //     var $ = cheerio.load(response.data);
+    axios.get("https://www.reuters.com/news/world").then((response) => {
+        var $ = cheerio.load(response.data);
 
-    //     $(".ImageStoryTemplate_image-story-container").each(function(i, element){
-    //         var result = {};
-    //         result.id = i;
-    //         result.title = $(this).find("h2.FeedItemHeadline_full a").text();
-    //         result.link = $(this).find("h2.FeedItemHeadline_full a").attr("href");
-    //         result.summary = $(this).find("p.FeedItemLede_lede").text();
+        $(".ImageStoryTemplate_image-story-container").each(function(i, element){
+            var result = {};
+            result.id = i;
+            result.title = $(this).find("h2.FeedItemHeadline_full a").text();
+            result.link = $(this).find("h2.FeedItemHeadline_full a").attr("href");
+            result.summary = $(this).find("p.FeedItemLede_lede").text();
  
 
-    //         hbsObject.scraped.push(result);
-    //     })
-    //     // console.log(hbsObject.scraped);
+            hbsObject.scraped.push(result);
+        })
+        // console.log(hbsObject.scraped);
 
-    //     res.render("scrape", hbsObject);
-    // })
+        res.render("scrape", hbsObject);
+    })
 
     // ===================== END WEB SCRAPER CODE ================================= //
 
@@ -91,7 +91,7 @@ router.get("/scrape", function(req,res){
     // setData(hbsObject, dummydata, function(res, hbsObject){
     //     res.render("scrape", hbsObject);
     // });  
-      
+
     // //=====================END DUMMY DATA VERSION==================================== //
 });
 
